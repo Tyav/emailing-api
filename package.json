@@ -1,0 +1,37 @@
+{
+  "name": "email-api-service",
+  "version": "1.0.0",
+  "description": "a backend api service that is pluggable for sending email services",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node index.js",
+    "start:dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tyav/emailing-api.git"
+  },
+  "keywords": [
+    "email",
+    "api",
+    "service",
+    "backend",
+    "pluggable"
+  ],
+  "author": "Moses Tyav",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Tyav/emailing-api/issues"
+  },
+  "homepage": "https://github.com/Tyav/emailing-api#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "joi": "^14.3.1",
+    "mongoose": "^5.5.15",
+    "nodemon": "^1.19.1"
+  }
+}
