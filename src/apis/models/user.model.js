@@ -5,7 +5,7 @@ let _ = require('lodash');
 
 let Schema = mongoose.Schema;
 
-let userSchema = new Schema(
+let UserSchema = new Schema(
 	{
 		name     : {
 			type      : String,
@@ -24,11 +24,46 @@ let userSchema = new Schema(
 	{ timestamps: true },
 );
 
-userSchema.methods.generateToken = function() {
+UserSchema.methods.generateToken = function() {
 	const token = jwt.sign({ id: this._id, user: _.pick(this, [ 'name', 'email' ]) }, config.get('jwtPrivateKey'));
 	return token;
 };
-const User = mongoose.model('user', userSchema);
+
+UserSchema.statics = {
+	/**
+	 * 
+	 * @param {ObjectId} id - The ObjectId of user
+	 * @returns {Promise<user, Error>}
+	 */
+	get(id){
+		return this.findById(id)
+			.select('name email createdAt')
+			.exec()
+			.then((user)=>{
+				if (user){
+					return user
+				}
+				return Promise.reject({message: 'no user exist'})
+			})
+	},
+	/**
+	 * 
+	 * @param {Number} limit - Number of users to be returned
+	 * @param {Number} skip - Number of users to be skipped
+	 * @returns {Promise<User[]>}
+	 */
+	load({limit= 50, skip=0}={}){
+		return this.find()
+			.select('name email createdAt')
+			.sort({createdAt: -1})
+			.skip(+skip)
+			.limit(+limit)
+			.exec();
+	}
+
+}
+
+const User = mongoose.model('user', UserSchema);
 
 module.exports = {
 	User,
