@@ -3,7 +3,7 @@ const router = require('express').Router();
 const userCtrl = require('../controllers/user.controllers')
 
 
-router.route('/user').get(userCtrl.getAll).post(userCtrl.create)
+router.route('/').get(userCtrl.getAll).post(userCtrl.create)
 
 
 
