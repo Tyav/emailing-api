@@ -1,3 +1,7 @@
 {
-  "jwtPrivateKey": "1234"
+  "jwtPrivateKey": "1234",
+  "mailService": "gmail",
+  "mailService-email": "tyav2greenz@gmail.com",
+  "mailService-pass": "8564@googlemail",
+  "saltRound":10
 }
